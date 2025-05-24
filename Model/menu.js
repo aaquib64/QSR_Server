@@ -1,16 +1,10 @@
-// models/Menu.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const ItemSchema = new mongoose.Schema({
-  id: String,
+const menuSchema = new mongoose.Schema({
   name: String,
   price: Number,
   image: String,
+  category: String, // e.g., "Beverages", "Snacks"
 });
 
-const MenuSchema = new mongoose.Schema({
-  category: String,
-  items: [ItemSchema],
-});
-
-module.exports = mongoose.model('menu', MenuSchema);
+module.exports = mongoose.model("menu", menuSchema, "menu");

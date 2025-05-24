@@ -7,10 +7,8 @@ router.post("/login", Controller.loginEmployee);
 
 router.post("/orders", Controller.orderDetails);
 
-// router.get('/login/:id', Controller.getEmployee);
-
 router.get("/menu", Controller.getMenu);
 
-
+// router.get('/login/:id', Controller.getEmployee);
 
 module.exports = router;

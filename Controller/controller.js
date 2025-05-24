@@ -28,7 +28,6 @@ exports.loginEmployee = async (req, res) => {
 };
 
 exports.orderDetails = async (req, res) => {
-
   console.log("Incoming Order:", req.body);
   const { employeeId, totalAmount, paymentMode } = req.body;
 
@@ -64,13 +63,22 @@ exports.orderDetails = async (req, res) => {
 // };
 
 exports.getMenu = async (req, res) => {
-  console.log("GET /menu hit"); // Add this line
   try {
-    const menu = await Menu.find();
-    res.status(200).json({ success: true, menu });
+    const items = await Menu.find(); // All items
+    console.log("Items fetched from DB:", items); // ✅ Add this
+    const categorized = {};
+
+    items.forEach((item) => {
+      if (!categorized[item.category]) {
+        categorized[item.category] = [];
+      }
+      categorized[item.category].push(item);
+    });
+
+    res.json(categorized);
   } catch (error) {
-    console.error("Error fetching menu:", error);
-    res.status(500).json({ success: false, message: "Server error" });
+    console.error("Error in getMenu:", error); // ✅ Log error
+    res.status(500).json({ error: "Failed to fetch menu data" });
   }
 };
 
