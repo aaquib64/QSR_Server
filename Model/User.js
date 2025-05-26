@@ -7,6 +7,11 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
   name: String,
+   role: {
+    type: String,
+    enum: ['employee', 'manager', 'supervisor'],
+    default: 'employee',
+  }
 });
 
 module.exports = mongoose.model("Employees", userSchema);
